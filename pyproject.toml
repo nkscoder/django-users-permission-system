@@ -4,24 +4,56 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "django-users-permission-system"
-version = "0.3.0"
-description = "Django URL-based RBAC with pluggable modules and multi-platform user sync"
+version = "0.3.1"
+description = "Generic Django RBAC plugin: URL permissions, roles, modules, GitLab/GitHub sync, and AI dashboard for any project."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [{ name = "Nitesh", email = "nkscoder@users.noreply.github.com" }]
-keywords = ["django", "rbac", "permissions", "gitlab", "github", "pypi"]
+maintainers = [{ name = "Nitesh", email = "nkscoder@users.noreply.github.com" }]
+keywords = [
+    "django",
+    "rbac",
+    "role-based-access-control",
+    "permissions",
+    "authorization",
+    "access-control",
+    "middleware",
+    "django-plugin",
+    "django-app",
+    "url-permissions",
+    "user-management",
+    "gitlab",
+    "github",
+    "bitbucket",
+    "gitea",
+    "pypi",
+    "user-sync",
+    "multi-platform",
+]
 classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
     "Framework :: Django",
     "Framework :: Django :: 4.2",
     "Framework :: Django :: 5.0",
     "Framework :: Django :: 5.1",
+    "Framework :: Django :: 5.2",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Systems Administration :: Authentication/Directory",
 ]
 dependencies = [
     "Django>=4.2",
@@ -31,12 +63,14 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://github.com/nkscoder/django-users-permission-system"
-Repository = "https://github.com/nkscoder/django-users-permission-system"
 Documentation = "https://github.com/nkscoder/django-users-permission-system#readme"
+Repository = "https://github.com/nkscoder/django-users-permission-system"
 Issues = "https://github.com/nkscoder/django-users-permission-system/issues"
+Changelog = "https://github.com/nkscoder/django-users-permission-system/releases"
+"PyPI" = "https://pypi.org/project/django-users-permission-system/"
 
 [project.optional-dependencies]
-dev = ["pytest", "pytest-django"]
+dev = ["pytest", "pytest-django", "build", "twine"]
 
 [project.entry-points."userspermissionsystem.platforms"]
 # Host projects can register custom adapters:
