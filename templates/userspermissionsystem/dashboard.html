@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page_title }} | Users Permission System</title>
+  <link rel="stylesheet" href="{% static 'userspermissionsystem/css/dashboard.css' %}">
+</head>
+<body class="ups-dashboard">
+  <header class="ups-hero">
+    <img src="{% static 'userspermissionsystem/images/dashboard-hero.png' %}" alt="AI Permission Dashboard" class="ups-hero__image">
+    <div class="ups-hero__overlay">
+      <p class="ups-hero__eyebrow">Users Permission System</p>
+      <h1>AI Permission Dashboard</h1>
+      <p class="ups-hero__subtitle">Monitor modules, platforms, RBAC health, and get setup help.</p>
+      <div class="ups-hero__actions">
+        <a href="{% url 'userspermissionsystem:documentation' %}" class="ups-btn ups-btn--ghost">Documentation</a>
+        <a href="/admin/" class="ups-btn ups-btn--primary">Django Admin</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="ups-main">
+    <section class="ups-stats">
+      <article class="ups-stat-card">
+        <h3>Active Modules</h3>
+        <p class="ups-stat-card__value">{{ stats.module_count }}</p>
+      </article>
+      <article class="ups-stat-card">
+        <h3>Permissions</h3>
+        <p class="ups-stat-card__value">{{ stats.permission_count }}</p>
+      </article>
+      <article class="ups-stat-card">
+        <h3>Roles</h3>
+        <p class="ups-stat-card__value">{{ stats.role_count }}</p>
+      </article>
+      <article class="ups-stat-card">
+        <h3>User Access Profiles</h3>
+        <p class="ups-stat-card__value">{{ stats.user_access_count }}</p>
+      </article>
+      <article class="ups-stat-card">
+        <h3>Sync Endpoints</h3>
+        <p class="ups-stat-card__value">{{ stats.sync_endpoint_count }}</p>
+      </article>
+    </section>
+
+    <section class="ups-grid">
+      <div class="ups-panel">
+        <div class="ups-panel__header">
+          <h2>Platform Integrations</h2>
+          <img src="{% static 'userspermissionsystem/images/platform-icons.png' %}" alt="Platform icons" class="ups-platform-strip">
+        </div>
+        <div class="ups-platform-list">
+          {% for platform, count in stats.platform_counts.items %}
+            <div class="ups-platform-item">
+              <span class="ups-platform-item__name">{{ platform|upper }}</span>
+              <span class="ups-platform-item__count">{{ count }} endpoint{{ count|pluralize }}</span>
+            </div>
+          {% empty %}
+            <p class="ups-muted">No sync endpoints configured yet. Add them in Django Admin.</p>
+          {% endfor %}
+        </div>
+        <p class="ups-muted">Registered adapters: {{ stats.registered_platforms|join:", " }}</p>
+      </div>
+
+      <div class="ups-panel ups-panel--ai">
+        <h2>AI Setup Assistant</h2>
+        <p class="ups-muted">Ask about GitLab, GitHub, PyPI, plugins, middleware, or sync.</p>
+        <div id="ups-chat-log" class="ups-chat-log">
+          <div class="ups-chat-msg ups-chat-msg--bot">
+            Hi! I can help you configure this permission system for any Django project.
+          </div>
+        </div>
+        <form id="ups-chat-form" class="ups-chat-form">
+          {% csrf_token %}
+          <input type="text" id="ups-chat-input" placeholder="How do I configure GitLab sync?" autocomplete="off">
+          <button type="submit" class="ups-btn ups-btn--primary">Ask</button>
+        </form>
+        <div class="ups-quick-prompts">
+          <button type="button" class="ups-chip" data-prompt="How do I install this plugin?">Install</button>
+          <button type="button" class="ups-chip" data-prompt="GitLab sync setup">GitLab</button>
+          <button type="button" class="ups-chip" data-prompt="GitHub org and team access">GitHub</button>
+          <button type="button" class="ups-chip" data-prompt="PyPI token provisioning">PyPI</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="ups-panel">
+      <h2>Architecture Overview</h2>
+      <img src="{% static 'userspermissionsystem/images/architecture-diagram.png' %}" alt="System architecture diagram" class="ups-architecture-image">
+    </section>
+
+    <section class="ups-panel">
+      <h2>Modules</h2>
+      <div class="ups-table-wrap">
+        <table class="ups-table">
+          <thead>
+            <tr>
+              <th>Label</th>
+              <th>Name</th>
+              <th>External</th>
+              <th>Permissions</th>
+              <th>Sync Endpoints</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for module in stats.modules %}
+              <tr>
+                <td><code>{{ module.label }}</code></td>
+                <td>{{ module.name }}</td>
+                <td>{% if module.is_external %}Yes{% else %}No{% endif %}</td>
+                <td>{{ module.permission_count }}</td>
+                <td>{{ module.endpoint_count }}</td>
+                <td>
+                  {% if module.is_active %}
+                    <span class="ups-badge ups-badge--ok">Active</span>
+                  {% else %}
+                    <span class="ups-badge ups-badge--warn">Inactive</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% empty %}
+              <tr><td colspan="6" class="ups-muted">No modules registered.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    window.UPS_AI_API_URL = "{% url 'userspermissionsystem:ai_assistant_api' %}";
+  </script>
+  <script src="{% static 'userspermissionsystem/js/dashboard.js' %}"></script>
+</body>
+</html>
