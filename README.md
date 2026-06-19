@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/django-users-permission-system.svg)](https://pypi.org/project/django-users-permission-system/)
 [![Python versions](https://img.shields.io/pypi/pyversions/django-users-permission-system.svg)](https://pypi.org/project/django-users-permission-system/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Django](https://img.shields.io/badge/Django-4.2%2B-092E20?logo=django&logoColor=white)](https://www.djangoproject.com/)
 [![GitHub Repo](https://img.shields.io/github/stars/nkscoder/django-users-permission-system?style=social)](https://github.com/nkscoder/django-users-permission-system)
 
@@ -16,7 +16,8 @@ pip install django-users-permission-system
 
 Use in **any Django project** as a drop-in app — no hardcoded project dependencies.
 
-![Architecture](docs/images/architecture-diagram.png)
+<!-- PyPI requires absolute HTTPS image URLs (relative paths do not work on pypi.org) -->
+![Architecture](https://raw.githubusercontent.com/nkscoder/django-users-permission-system/main/docs/images/readme/architecture-diagram.png)
 
 ## Why use this package?
 
@@ -74,9 +75,9 @@ path("permissions/", include("userspermissionsystem.urls")),
 | Documentation | `/permissions/docs/` |
 | AI Assistant API | `/permissions/api/ai-assistant/` |
 
-![Dashboard](docs/images/dashboard-hero.png)
+![Dashboard](https://raw.githubusercontent.com/nkscoder/django-users-permission-system/main/docs/images/readme/dashboard-hero.png)
 
-![Platforms](docs/images/platform-icons.png)
+![Platforms](https://raw.githubusercontent.com/nkscoder/django-users-permission-system/main/docs/images/readme/platform-icons.png)
 
 ## Django settings
 
@@ -146,6 +147,6 @@ See [docs/platforms.md](docs/platforms.md) for configuration examples.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](https://github.com/nkscoder/django-users-permission-system/blob/main/LICENSE).
 
 Copyright (c) 2026 [Nitesh (nkscoder)](https://github.com/nkscoder)
